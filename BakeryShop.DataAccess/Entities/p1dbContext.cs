@@ -9,10 +9,11 @@ namespace BakeryShop.DataAccess.Entities
 {
     public partial class p1dbContext : IdentityDbContext<User, Role, int>
     {
+        //default constructor for migration only
         public p1dbContext()
         {
         }
-
+        //Will read configuration from my settings
         public p1dbContext(DbContextOptions<p1dbContext> options)
             : base(options)
         {
@@ -23,8 +24,10 @@ namespace BakeryShop.DataAccess.Entities
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemCategory> ItemCategories { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<PurchOrder> PurchOrders { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public virtual DbSet<PaymentDetails> PaymentDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -110,16 +113,6 @@ namespace BakeryShop.DataAccess.Entities
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<PurchOrder>(entity =>
-            {
-                entity.ToTable("PurchOrder");
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.PurchOrders)
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PurchOrde__Locat__208CD6FA");
-            });
 
             modelBuilder.Entity<ShoppingCart>(entity =>
             {

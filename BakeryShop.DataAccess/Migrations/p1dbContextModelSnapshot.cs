@@ -153,7 +153,31 @@ namespace BakeryShop.DataAccess.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("BakeryShop.DataAccess.Entities.PurchOrder", b =>
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,20 +187,60 @@ namespace BakeryShop.DataAccess.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItem");
+                });
+
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.PaymentDetails", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("GrandTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("PurchOrder");
+                    b.ToTable("PaymentDetails");
                 });
 
             modelBuilder.Entity("BakeryShop.DataAccess.Entities.Role", b =>
@@ -445,15 +509,22 @@ namespace BakeryShop.DataAccess.Migrations
                     b.Navigation("ItemCategory");
                 });
 
-            modelBuilder.Entity("BakeryShop.DataAccess.Entities.PurchOrder", b =>
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.Order", b =>
                 {
-                    b.HasOne("BakeryShop.DataAccess.Entities.Location", "Location")
-                        .WithMany("PurchOrders")
+                    b.HasOne("BakeryShop.DataAccess.Entities.Location", null)
+                        .WithMany("Orders")
                         .HasForeignKey("LocationId")
-                        .HasConstraintName("FK__PurchOrde__Locat__208CD6FA")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Location");
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.OrderItem", b =>
+                {
+                    b.HasOne("BakeryShop.DataAccess.Entities.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -521,7 +592,12 @@ namespace BakeryShop.DataAccess.Migrations
                 {
                     b.Navigation("Inventories");
 
-                    b.Navigation("PurchOrders");
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("BakeryShop.DataAccess.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("BakeryShop.DataAccess.Entities.ShoppingCart", b =>

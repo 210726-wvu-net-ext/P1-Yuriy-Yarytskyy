@@ -10,7 +10,7 @@ namespace BakeryShop.DataAccess.Entities
         public Location()
         {
             Inventories = new HashSet<Inventory>();
-            PurchOrders = new HashSet<PurchOrder>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -18,6 +18,7 @@ namespace BakeryShop.DataAccess.Entities
         public string Address { get; set; }
 
         public virtual ICollection<Inventory> Inventories { get; set; }
-        public virtual ICollection<PurchOrder> PurchOrders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+
     }
 }
