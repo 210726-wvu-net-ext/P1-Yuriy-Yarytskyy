@@ -86,7 +86,7 @@ namespace BakeryShop.WebApp.Controllers
         {
             return View();
         }
-        public IActionResult Unauthorize()
+        public IActionResult Unauthorized()
         {
             return View();
         }
