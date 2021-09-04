@@ -21,5 +21,6 @@ namespace BakeryShop.DataAccess.Entities
 
         public virtual ItemCategory ItemCategory { get; set; }
         public virtual ICollection<Inventory> Inventories { get; set; }
+       
     }
 }

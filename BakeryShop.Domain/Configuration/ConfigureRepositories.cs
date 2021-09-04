@@ -32,11 +32,11 @@ namespace BakeryShop.Domain.Configuration
 
             services.AddTransient<IRepository<Item>, Repository<Item>>();
             services.AddTransient<IRepository<ItemCategory>, Repository<ItemCategory>>();
+            services.AddTransient<IRepository<Inventory>, Repository<Inventory>>();
             services.AddTransient<IRepository<Order>, Repository<Order>>();
             services.AddTransient<IRepository<Role>, Repository<Role>>();
             services.AddTransient<IRepository<User>, Repository<User>>();
             services.AddTransient<IRepository<ShoppingCart>, Repository<ShoppingCart>>();
-            services.AddTransient<IRepository<Inventory>, Repository<Inventory>>();
             services.AddTransient<IRepository<Location>, Repository<Location>>();
             services.AddTransient<IRepository<CartItem>, Repository<CartItem>>();
             services.AddTransient<IRepository<OrderItem>, Repository<OrderItem>>();
