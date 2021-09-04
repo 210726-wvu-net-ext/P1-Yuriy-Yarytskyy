@@ -79,7 +79,7 @@ footer a, footer a:visited {
     }
 
     footer {
-        position: absolute;
+        position: relative;
         bottom: 0;
     }
 }
