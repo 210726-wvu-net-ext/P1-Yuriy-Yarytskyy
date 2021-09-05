@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 #nullable disable
 
@@ -23,8 +25,9 @@ namespace BakeryShop.DataAccess.Entities
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public Guid ShopCartId { get; set; }
-        
 
-        public virtual ShoppingCart ShopCart { get; set; }
+
+        [JsonIgnore]
+        public ShoppingCart Cart { get; set; }
     }
 }

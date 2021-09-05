@@ -47,16 +47,16 @@ namespace BakeryShop.DataAccess.Implementation
             var cart = GetCart(cartId);
             if (cart != null)
             {
-                for (int i = 0; i < cart.CartItems.Count; i++)
+                for (int i = 0; i < cart.Items.Count; i++)
                 {
-                    if (cart.CartItems[i].Id == itemId)
+                    if (cart.Items[i].Id == itemId)
                     {
                         flag = true;
                         //for minus quantity
-                        if (Quantity < 0 && cart.CartItems[i].Quantity > 1)
-                            cart.CartItems[i].Quantity += (Quantity);
+                        if (Quantity < 0 && cart.Items[i].Quantity > 1)
+                            cart.Items[i].Quantity += (Quantity);
                         else if (Quantity > 0)
-                            cart.CartItems[i].Quantity += (Quantity);
+                            cart.Items[i].Quantity += (Quantity);
                         break;
                     }
                 }

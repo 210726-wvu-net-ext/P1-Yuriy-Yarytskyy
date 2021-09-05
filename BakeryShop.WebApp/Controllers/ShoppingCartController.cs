@@ -15,7 +15,7 @@ namespace BakeryShop.WebApp.Controllers
     {
         IShoppingCartService _shoppingCartService;
 
-        Guid CartId
+        Guid ShopCartId
         {
             get
             {
@@ -41,7 +41,7 @@ namespace BakeryShop.WebApp.Controllers
         }
         public IActionResult Index()
         {
-            ShoppingCartModel cart = _shoppingCartService.GetCartDetails(CartId);
+            ShoppingCartModel cart = _shoppingCartService.GetCartDetails(ShopCartId);
             //if (CurrentUser != null && cart != null)
             //{
             //    TempData.Set("Cart", cart);
@@ -57,7 +57,7 @@ namespace BakeryShop.WebApp.Controllers
 
             if (ItemId > 0 && Quantity > 0)
             {
-                ShoppingCart cart = _shoppingCartService.AddItem(UserId, CartId, ItemId, UnitPrice, Quantity);
+                ShoppingCart cart = _shoppingCartService.AddItem(UserId, ShopCartId, ItemId, UnitPrice, Quantity);
                 var data = JsonSerializer.Serialize(cart);
                 return Json(data);
             }
@@ -69,14 +69,14 @@ namespace BakeryShop.WebApp.Controllers
 
         public IActionResult DeleteItem(int Id)
         {
-            int count = _shoppingCartService.DeleteItem(CartId, Id);
+            int count = _shoppingCartService.DeleteItem(ShopCartId, Id);
             return Json(count);
         }
 
         [Route("Cart/UpdateQuantity/{Id}/{Quantity}")]
         public IActionResult UpdateQuantity(int Id, int Quantity)
         {
-            int count = _shoppingCartService.UpdateQuantity(CartId, Id, Quantity);
+            int count = _shoppingCartService.UpdateQuantity(ShopCartId, Id, Quantity);
             return Json(count);
         }
     }

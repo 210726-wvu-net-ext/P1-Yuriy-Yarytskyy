@@ -34,13 +34,13 @@ namespace BakeryShop.Domain.Implementation
                     cart.CreatedDate = DateTime.Now;
 
                     item.ShopCartId = cart.Id;
-                    cart.CartItems.Add(item);
+                    cart.Items.Add(item);
                     _cartRepo.Add(cart);
                     _cartRepo.SaveChanges();
                 }
                 else
                 {
-                    CartItem item = cart.CartItems.Where(p => p.ItemId == ItemId).FirstOrDefault();
+                    CartItem item = cart.Items.Where(p => p.ItemId == ItemId).FirstOrDefault();
                     if (item != null)
                     {
                         item.Quantity += Quantity;
@@ -51,7 +51,7 @@ namespace BakeryShop.Domain.Implementation
                     {
                         item = new CartItem(ItemId, Quantity, UnitPrice);
                         item.ShopCartId = cart.Id;
-                        cart.CartItems.Add(item);
+                        cart.Items.Add(item);
 
                         _cartItem.Update(item);
                         _cartItem.SaveChanges();
@@ -73,7 +73,7 @@ namespace BakeryShop.Domain.Implementation
         public int GetCartCount(Guid cartId)
         {
             var cart = _cartRepo.GetCart(cartId);
-            return cart != null ? cart.CartItems.Count() : 0;
+            return cart != null ? cart.Items.Count() : 0;
         }
 
         public ShoppingCartModel GetCartDetails(Guid cartId)

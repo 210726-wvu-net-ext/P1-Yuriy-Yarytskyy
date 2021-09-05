@@ -38,8 +38,8 @@ namespace BakeryShop.DataAccess.Entities
             {
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 0)");
 
-                entity.HasOne(d => d.ShopCart)
-                    .WithMany(p => p.CartItems)
+                entity.HasOne(d => d.Cart)
+                    .WithMany(p => p.Items)
                     .HasForeignKey(d => d.ShopCartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__CartItems__ShopC__1BC821DD");

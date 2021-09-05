@@ -9,7 +9,7 @@ namespace BakeryShop.DataAccess.Entities
     {
         public ShoppingCart()
         {
-            CartItems = new List<CartItem>();
+            Items = new List<CartItem>();
             CreatedDate = DateTime.Now;
             IsActive = true;
         }
@@ -17,9 +17,10 @@ namespace BakeryShop.DataAccess.Entities
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool? IsActive { get; set; }
-        public virtual List<CartItem> CartItems { get; private set; }
+        public virtual List<CartItem> Items { get; private set; }
 
-        //public virtual ICollection<CartItem> CartItems { get; set; }
+        public bool IsActive { get; set; }
+
+
     }
 }
