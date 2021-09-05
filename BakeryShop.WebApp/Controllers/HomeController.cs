@@ -6,21 +6,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BakeryShop.Domain.Interfaces;
 
 namespace BakeryShop.WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        ICatalogService _catalogService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var items = _catalogService.GetItems();
+            return View(items);
         }
 
         public IActionResult Privacy()

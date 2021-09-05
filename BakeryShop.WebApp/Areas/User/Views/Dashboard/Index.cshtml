@@ -1,7 +1,8 @@
-﻿
+﻿@using System.ComponentModel
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>User Dashboard</h1>
+@await Component.InvokeAsync("BakeryShopMenu")
 

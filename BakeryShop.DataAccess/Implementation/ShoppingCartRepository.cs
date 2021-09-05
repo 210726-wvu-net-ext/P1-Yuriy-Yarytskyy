@@ -1,5 +1,6 @@
 ﻿using BakeryShop.DataAccess.Entities;
 using BakeryShop.DataAccess.Interfaces;
+using BakeryShop.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,17 +22,14 @@ namespace BakeryShop.DataAccess.Implementation
 
         }
 
-        public ShoppingCart GetShoppingCart(int ShoppingCartId)
+        public ShoppingCart GetCart(Guid CartId)
         {
-            return appContext.ShoppingCarts.Include("CartItems")
-                .Where(s => s.Id == ShoppingCartId && s.IsActive == true)
-                .FirstOrDefault();
+            return appContext.ShoppingCarts.Include("Items").Where(c => c.Id == CartId && c.IsActive == true).FirstOrDefault();
         }
 
-        public int DeleteCartItem(int shoppingCartId, int cartItemId)
+        public int DeleteItem(Guid cartId, int itemId)
         {
-            var item = appContext.CartItems.Where(ci => ci.ShopCartId == shoppingCartId && ci.Id == cartItemId)
-                .FirstOrDefault();
+            var item = appContext.CartItems.Where(ci => ci.ShopCartId == cartId && ci.Id == itemId).FirstOrDefault();
             if (item != null)
             {
                 appContext.CartItems.Remove(item);
@@ -43,15 +41,15 @@ namespace BakeryShop.DataAccess.Implementation
             }
         }
 
-        public int UpdateQuantity(int shoppingCartId, int cartItemId, int Quantity)
+        public int UpdateQuantity(Guid cartId, int itemId, int Quantity)
         {
             bool flag = false;
-            var cart = GetShoppingCart(shoppingCartId);
+            var cart = GetCart(cartId);
             if (cart != null)
             {
                 for (int i = 0; i < cart.CartItems.Count; i++)
                 {
-                    if (cart.CartItems[i].Id == cartItemId)
+                    if (cart.CartItems[i].Id == itemId)
                     {
                         flag = true;
                         //for minus quantity
@@ -62,47 +60,45 @@ namespace BakeryShop.DataAccess.Implementation
                         break;
                     }
                 }
-
                 if (flag)
                     return appContext.SaveChanges();
             }
-
             return 0;
         }
 
-        public int UpdateShoppingCart(int shoppingCartId, int userId)
+        public int UpdateCart(Guid cartId, int userId)
         {
-            ShoppingCart shoppingCart = GetShoppingCart(shoppingCartId);
-            shoppingCart.UserId = userId;
+            ShoppingCart cart = GetCart(cartId);
+            cart.UserId = userId;
             return appContext.SaveChanges();
         }
 
-        //public CartModel GetCartDetails(int CartId)
-        //{
-        //    var model = (from cart in appContext.Carts
-        //                 where cart.Id == CartId && cart.IsActive == true
-        //                 select new CartModel
-        //                 {
-        //                     Id = cart.Id,
-        //                     UserId = cart.UserId,
-        //                     CreatedDate = cart.CreatedDate,
-        //                     Items = (from cartItem in appContext.CartItems
-        //                              join item in appContext.Items
-        //                                  on cartItem.ItemId equals item.Id
-        //                              where cartItem.CartId == CartId
-        //                              select new ItemModel
-        //                              {
-        //                                  Id = cartItem.Id,
-        //                                  Name = item.Name,
-        //                                  Description = item.Description,
-        //                                  ImageUrl = item.ImageUrl,
-        //                                  Quantity = cartItem.Quantity,
-        //                                  ItemId = item.Id,
-        //                                  UnitPrice = cartItem.UnitPrice
-        //                              }).ToList()
-        //                 }).FirstOrDefault();
-        //    return model;
-        //}
+        public ShoppingCartModel GetCartDetails(Guid CartId)
+        {
+            var model = (from cart in appContext.ShoppingCarts
+                         where cart.Id == CartId && cart.IsActive == true
+                         select new ShoppingCartModel
+                         {
+                             Id = cart.Id,
+                             UserId = cart.UserId,
+                             CreatedDate = cart.CreatedDate,
+                             Items = (from cartItem in appContext.CartItems
+                                      join item in appContext.Items
+                                      on cartItem.ItemId equals item.Id
+                                      where cartItem.ShopCartId == CartId
+                                      select new ItemModel
+                                      {
+                                          Id = cartItem.Id,
+                                          Name = item.Name,
+                                          Description = item.Description,
+                                          ImageUrl = item.ImageUrl,
+                                          Quantity = cartItem.Quantity,
+                                          ItemId = item.Id,
+                                          UnitPrice = cartItem.UnitPrice
+                                      }).ToList()
+                         }).FirstOrDefault();
+            return model;
+        }
     }
 }
 

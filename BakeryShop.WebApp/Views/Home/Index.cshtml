@@ -1,9 +1,35 @@
-﻿
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using System.ComponentModel
+@model IEnumerable<BakeryShop.DataAccess.Entities.Item>
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "_PublicLayout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Bakery Shop</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div style="background:#fbb754;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 text-black" style="width:100%">
+                <div class="pt-5 pb-5">
+                    <h1 style="color:rgb(10, 146, 162);">THE SWEET LIFE</h1>
+                    <h3 style="color:rgb(10, 146, 162);">Voted best Cakes, Cupcakes & Desserts in Stamford, CT!</h3>
+                    <h6 style="color:rgb(10, 146, 162);" class="pb-4">
+                        Tucked into the back of Main Street plaza you’ll find a gorgeous Parisian-style bakery complete 
+                        with crystal chandeliers and pink granite counter tops.
+                        We specialize in weddings, cakes, cupcakes, pastries, and cookies!
+                        We are locally renowned for our cakes, which are touted for being “as delicious as they look”.
+                        Our talented team of cake decorators come with years of experience and an abundance of creative ideas.
+                    </h6>
+                    <p>
+                        <a href="#heading" class="btn btn-success">PLACE YOUR ORDER</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4 pt-4">
+                <img src="~/images/logo.png" class="img-fluid" />
+            </div>
+        </div>
+    </div>
 </div>
+
+@await Component.InvokeAsync("BakeryShopMenu")

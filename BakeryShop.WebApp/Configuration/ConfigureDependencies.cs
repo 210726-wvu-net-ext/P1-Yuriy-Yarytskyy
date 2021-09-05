@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BakeryShop.DataAccess.Interfaces;
 using BakeryShop.Domain.Implementation;
 using BakeryShop.Domain.Interfaces;
 using BakeryShop.WebApp.Helpers;
@@ -18,6 +19,7 @@ namespace BakeryShop.WebApp.Configuration
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<ICatalogService, CatalogService>();
+            services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddTransient<IFileHelper, FileHelper>();
 
         }
