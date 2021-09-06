@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BakeryShop.DataAccess.Migrations
 {
-    public partial class @new : Migration
+    public partial class New : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,17 +51,31 @@ namespace BakeryShop.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemCategory",
+                name: "Carts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemCategory", x => x.Id);
+                    table.PrimaryKey("PK_ItemCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,8 +84,8 @@ namespace BakeryShop.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
-                    Address = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,21 +110,6 @@ namespace BakeryShop.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentDetails", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Is_Active = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,26 +219,48 @@ namespace BakeryShop.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
+                name: "CartItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,0)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: true),
+                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ItemCategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK__Item__ItemCatego__43D61337",
+                        name: "FK_Items_ItemCategories_ItemCategoryId",
                         column: x => x.ItemCategoryId,
-                        principalTable: "ItemCategory",
+                        principalTable: "ItemCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,29 +285,7 @@ namespace BakeryShop.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ShopCartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK__CartItems__ShopC__1BC821DD",
-                        column: x => x.ShopCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventory",
+                name: "Inventories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -297,19 +296,19 @@ namespace BakeryShop.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory", x => x.Id);
+                    table.PrimaryKey("PK_Inventories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK__Inventory__ItemI__46B27FE2",
+                        name: "FK_Inventories_Items_ItemId",
                         column: x => x.ItemId,
-                        principalTable: "Item",
+                        principalTable: "Items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Inventory__Locat__47A6A41B",
+                        name: "FK_Inventories_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -375,23 +374,23 @@ namespace BakeryShop.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ShopCartId",
+                name: "IX_CartItems_CartId",
                 table: "CartItems",
-                column: "ShopCartId");
+                column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory_ItemId",
-                table: "Inventory",
+                name: "IX_Inventories_ItemId",
+                table: "Inventories",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory_LocationId",
-                table: "Inventory",
+                name: "IX_Inventories_LocationId",
+                table: "Inventories",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_ItemCategoryId",
-                table: "Item",
+                name: "IX_Items_ItemCategoryId",
+                table: "Items",
                 column: "ItemCategoryId");
 
             migrationBuilder.CreateIndex(
@@ -426,7 +425,7 @@ namespace BakeryShop.DataAccess.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
-                name: "Inventory");
+                name: "Inventories");
 
             migrationBuilder.DropTable(
                 name: "OrderItem");
@@ -441,16 +440,16 @@ namespace BakeryShop.DataAccess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCarts");
+                name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "ItemCategory");
+                name: "ItemCategories");
 
             migrationBuilder.DropTable(
                 name: "Locations");

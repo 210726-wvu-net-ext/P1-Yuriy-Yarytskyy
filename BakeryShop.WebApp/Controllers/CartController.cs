@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using BakeryShop.DataAccess.Entities;
 using BakeryShop.DataAccess.Interfaces;
+using BakeryShop.WebApp.Interfaces;
 using BakeryShop.DataAccess.Models;
+using BakeryShop.WebApp.Helpers;
+
 
 namespace BakeryShop.WebApp.Controllers
 {
-    public class ShoppingCartController : BaseController
+    public class CartController : BaseController
     {
-        IShoppingCartService _shoppingCartService;
+        ICartService _cartService;
 
-        Guid ShopCartId
+        Guid CartId
         {
             get
             {
@@ -30,25 +33,23 @@ namespace BakeryShop.WebApp.Controllers
                 {
                     Id = Guid.Parse(CId);
                 }
-
                 return Id;
             }
         }
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService, UserManager<User> userManager) : base(userManager)
+        public CartController(ICartService cartService, UserManager<User> userManager) : base(userManager)
         {
-            _shoppingCartService = shoppingCartService;
+            _cartService = cartService;
         }
         public IActionResult Index()
         {
-            ShoppingCartModel cart = _shoppingCartService.GetCartDetails(ShopCartId);
-            //if (CurrentUser != null && cart != null)
-            //{
-            //    TempData.Set("Cart", cart);
-            //    _shoppingCartService.UpdateCart(cart.Id, CurrentUser.Id);
-            //}
+            CartModel cart = _cartService.GetCartDetails(CartId);
+            if (CurrentUser != null && cart != null)
+            {
+                //TempData.Set("Cart", cart);
+                _cartService.UpdateCart(cart.Id, CurrentUser.Id);
+            }
             return View(cart);
-
         }
         [Route("Cart/AddToCart/{ItemId}/{UnitPrice}/{Quantity}")]
         public IActionResult AddToCart(int ItemId, decimal UnitPrice, int Quantity)
@@ -57,7 +58,7 @@ namespace BakeryShop.WebApp.Controllers
 
             if (ItemId > 0 && Quantity > 0)
             {
-                ShoppingCart cart = _shoppingCartService.AddItem(UserId, ShopCartId, ItemId, UnitPrice, Quantity);
+                Cart cart = _cartService.AddItem(UserId, CartId, ItemId, UnitPrice, Quantity);
                 var data = JsonSerializer.Serialize(cart);
                 return Json(data);
             }
@@ -69,15 +70,27 @@ namespace BakeryShop.WebApp.Controllers
 
         public IActionResult DeleteItem(int Id)
         {
-            int count = _shoppingCartService.DeleteItem(ShopCartId, Id);
+            int count = _cartService.DeleteItem(CartId, Id);
             return Json(count);
         }
 
         [Route("Cart/UpdateQuantity/{Id}/{Quantity}")]
         public IActionResult UpdateQuantity(int Id, int Quantity)
         {
-            int count = _shoppingCartService.UpdateQuantity(ShopCartId, Id, Quantity);
+            int count = _cartService.UpdateQuantity(CartId, Id, Quantity);
             return Json(count);
         }
+
+        public IActionResult GetCartCount()
+        {
+            int count = _cartService.GetCartCount(CartId);
+            return Json(count);
+        }
+
+        public IActionResult CheckOut()
+        {
+            return View();
+        }
+        
     }
 }

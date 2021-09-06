@@ -8,14 +8,14 @@ using BakeryShop.DataAccess.Models;
 
 namespace BakeryShop.DataAccess.Interfaces
 {
-    public interface IShoppingCartService
+    public interface ICartService
     {
         int GetCartCount(Guid cartId);
-        ShoppingCartModel GetCartDetails(Guid cartId);
-        ShoppingCart AddItem(int UserId, Guid CartId, int ItemId, decimal UnitPrice, int Quantity);
+        CartModel GetCartDetails(Guid cartId);
+        Cart AddItem(int UserId, Guid CartId, int ItemId, decimal UnitPrice, int Quantity);
         int DeleteItem(Guid cartId, int ItemId);
         int UpdateQuantity(Guid cartId, int id, int quantity);
         int UpdateCart(Guid CartId, int UserId);
-        
+
     }
 }

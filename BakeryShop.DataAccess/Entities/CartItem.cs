@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BakeryShop.DataAccess.Entities
 {
-    public partial class CartItem
+    public class CartItem
     {
         public CartItem()
         {
@@ -16,18 +16,17 @@ namespace BakeryShop.DataAccess.Entities
         public CartItem(int itemId, int quantity, decimal unitPrice)
         {
             ItemId = itemId;
-            Quantity = quantity;
             UnitPrice = unitPrice;
+            Quantity = quantity;
         }
 
         public int Id { get; set; }
-        public int ItemId { get; set; }
-        public decimal UnitPrice { get; set; }
+        public Guid CartId { get; set; }
+        public int ItemId { get; private set; }
+        public decimal UnitPrice { get; private set; }
         public int Quantity { get; set; }
-        public Guid ShopCartId { get; set; }
-
 
         [JsonIgnore]
-        public ShoppingCart Cart { get; set; }
+        public Cart Cart { get; set; }
     }
 }

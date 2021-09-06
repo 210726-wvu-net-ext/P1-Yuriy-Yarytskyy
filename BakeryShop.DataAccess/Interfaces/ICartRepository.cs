@@ -8,10 +8,10 @@ using BakeryShop.DataAccess.Models;
 
 namespace BakeryShop.DataAccess.Interfaces
 {
-    public interface IShoppingCartRepository : IRepository<ShoppingCart>
+    public interface ICartRepository : IRepository<Cart>
     {
-        ShoppingCart GetCart(Guid CartId);
-        ShoppingCartModel GetCartDetails(Guid CartId);
+        Cart GetCart(Guid CartId);
+        CartModel GetCartDetails(Guid CartId);
         int DeleteItem(Guid cartId, int itemId);
         int UpdateQuantity(Guid cartId, int itemId, int Quantity);
         int UpdateCart(Guid cartId, int userId);

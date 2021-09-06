@@ -10,26 +10,26 @@ using System.Threading.Tasks;
 
 namespace BakeryShop.DataAccess.Implementation
 {
-    public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
+    public class CartRepository : Repository<Cart>, ICartRepository
     {
-        private p1dbContext appContext
+        private p0dbContext appContext
         {
-            get { return _dbContext as p1dbContext; }
+            get { return _dbContext as p0dbContext; }
         }
 
-        public ShoppingCartRepository(DbContext dbContext) : base(dbContext)
+        public CartRepository(DbContext dbContext) : base(dbContext)
         {
 
         }
 
-        public ShoppingCart GetCart(Guid CartId)
+        public Cart GetCart(Guid CartId)
         {
-            return appContext.ShoppingCarts.Include("Items").Where(c => c.Id == CartId && c.IsActive == true).FirstOrDefault();
+            return appContext.Carts.Include("Items").Where(c => c.Id == CartId && c.IsActive == true).FirstOrDefault();
         }
 
         public int DeleteItem(Guid cartId, int itemId)
         {
-            var item = appContext.CartItems.Where(ci => ci.ShopCartId == cartId && ci.Id == itemId).FirstOrDefault();
+            var item = appContext.CartItems.Where(ci => ci.CartId == cartId && ci.Id == itemId).FirstOrDefault();
             if (item != null)
             {
                 appContext.CartItems.Remove(item);
@@ -68,16 +68,16 @@ namespace BakeryShop.DataAccess.Implementation
 
         public int UpdateCart(Guid cartId, int userId)
         {
-            ShoppingCart cart = GetCart(cartId);
+            Cart cart = GetCart(cartId);
             cart.UserId = userId;
             return appContext.SaveChanges();
         }
 
-        public ShoppingCartModel GetCartDetails(Guid CartId)
+        public CartModel GetCartDetails(Guid CartId)
         {
-            var model = (from cart in appContext.ShoppingCarts
+            var model = (from cart in appContext.Carts
                          where cart.Id == CartId && cart.IsActive == true
-                         select new ShoppingCartModel
+                         select new CartModel
                          {
                              Id = cart.Id,
                              UserId = cart.UserId,
@@ -85,7 +85,7 @@ namespace BakeryShop.DataAccess.Implementation
                              Items = (from cartItem in appContext.CartItems
                                       join item in appContext.Items
                                       on cartItem.ItemId equals item.Id
-                                      where cartItem.ShopCartId == CartId
+                                      where cartItem.CartId == CartId
                                       select new ItemModel
                                       {
                                           Id = cartItem.Id,

@@ -27,6 +27,12 @@ namespace BakeryShop.WebApp.Controllers
             return View(items);
         }
 
+        public IActionResult IndexCategoryResult()
+        {
+            var categories = _catalogService.GetCategories();
+            return View(categories);
+        }
+
         public IActionResult Privacy()
         {
             return View();

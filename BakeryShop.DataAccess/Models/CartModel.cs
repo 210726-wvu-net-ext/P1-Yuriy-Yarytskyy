@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BakeryShop.DataAccess.Models
 {
-    public class ShoppingCartModel
+    public class CartModel
     {
-        public ShoppingCartModel()
+        public CartModel()
         {
             Items = new List<ItemModel>();
         }

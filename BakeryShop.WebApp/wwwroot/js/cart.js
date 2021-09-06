@@ -53,19 +53,19 @@ function updateQuantity(id, quantity) {
     }
 }
 
-//$(document).ready(function () {
-//    var cookie = $.cookie('CId');
-//    if (cookie) {
-//        $.ajax({
-//            type: "GET",
-//            contentType: "application/json; charset=utf-8",
-//            url: '/Cart/GetCartCount',
-//            dataType: "json",
-//            success: function (data) {
-//                $('.noti_Counter').text(data);
-//            },
-//            error: function (result) {
-//            },
-//        });
-//    }
-//});
+$(document).ready(function () {
+    var cookie = $.cookie('CId');
+    if (cookie) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '/Cart/GetCartCount',
+            dataType: "json",
+            success: function (data) {
+                $('.noti_Counter').text(data);
+            },
+            error: function (result) {
+            },
+        });
+    }
+});

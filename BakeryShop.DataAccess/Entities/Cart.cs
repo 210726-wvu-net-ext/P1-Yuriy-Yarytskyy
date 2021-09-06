@@ -5,15 +5,14 @@ using System.Collections.Generic;
 
 namespace BakeryShop.DataAccess.Entities
 {
-    public partial class ShoppingCart
+    public partial class Cart
     {
-        public ShoppingCart()
+        public Cart()
         {
             Items = new List<CartItem>();
             CreatedDate = DateTime.Now;
             IsActive = true;
         }
-
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public DateTime CreatedDate { get; set; }

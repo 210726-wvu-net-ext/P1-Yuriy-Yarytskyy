@@ -8,11 +8,11 @@ namespace BakeryShop.DataAccess.Implementation
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        private p1dbContext appContext
+        private p0dbContext appContext
         {
             get
             {
-                return _dbContext as p1dbContext;
+                return _dbContext as p0dbContext;
             }
         }
         public OrderRepository(DbContext dbContext) : base(dbContext)

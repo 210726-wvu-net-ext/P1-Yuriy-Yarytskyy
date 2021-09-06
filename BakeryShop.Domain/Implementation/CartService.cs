@@ -11,29 +11,30 @@ using BakeryShop.DataAccess.Models;
 
 namespace BakeryShop.Domain.Implementation
 {
-    public class ShoppingCartService : IShoppingCartService
+    public class CartService : ICartService
     {
-        private readonly IShoppingCartRepository _cartRepo;
+        private readonly ICartRepository _cartRepo;
         private readonly IRepository<CartItem> _cartItem;
-        public ShoppingCartService(IShoppingCartRepository cartRepo, IRepository<CartItem> cartItem)
+        public CartService(ICartRepository cartRepo, IRepository<CartItem> cartItem)
         {
             _cartRepo = cartRepo;
             _cartItem = cartItem;
         }
-        public ShoppingCart AddItem(int UserId, Guid CartId, int ItemId, decimal UnitPrice, int Quantity)
+
+        public Cart AddItem(int UserId, Guid CartId, int ItemId, decimal UnitPrice, int Quantity)
         {
             try
             {
-                ShoppingCart cart = _cartRepo.GetCart(CartId);
+                Cart cart = _cartRepo.GetCart(CartId);
                 if (cart == null)
                 {
-                    cart = new ShoppingCart();
+                    cart = new Cart();
                     CartItem item = new CartItem(ItemId, Quantity, UnitPrice);
                     cart.Id = CartId;
                     cart.UserId = UserId;
                     cart.CreatedDate = DateTime.Now;
 
-                    item.ShopCartId = cart.Id;
+                    item.CartId = cart.Id;
                     cart.Items.Add(item);
                     _cartRepo.Add(cart);
                     _cartRepo.SaveChanges();
@@ -50,7 +51,7 @@ namespace BakeryShop.Domain.Implementation
                     else
                     {
                         item = new CartItem(ItemId, Quantity, UnitPrice);
-                        item.ShopCartId = cart.Id;
+                        item.CartId = cart.Id;
                         cart.Items.Add(item);
 
                         _cartItem.Update(item);
@@ -76,7 +77,7 @@ namespace BakeryShop.Domain.Implementation
             return cart != null ? cart.Items.Count() : 0;
         }
 
-        public ShoppingCartModel GetCartDetails(Guid cartId)
+        public CartModel GetCartDetails(Guid cartId)
         {
             var model = _cartRepo.GetCartDetails(cartId);
             if (model != null && model.Items.Count > 0)
@@ -88,11 +89,11 @@ namespace BakeryShop.Domain.Implementation
                     subTotal += item.Total;
                 }
                 model.Total = subTotal;
-                //6% tax
-                model.Tax = Math.Round((model.Total * 6) / 100, 2);
+                //8 tax
+                model.Tax = Math.Round((model.Total * 8) / 100, 2);
                 model.GrandTotal = model.Tax + model.Total;
             }
-            return model; ;
+            return model;
         }
 
         public int UpdateCart(Guid CartId, int UserId)
