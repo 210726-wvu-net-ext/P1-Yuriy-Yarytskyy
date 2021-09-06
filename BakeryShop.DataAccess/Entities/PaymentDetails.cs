@@ -17,7 +17,7 @@ namespace BakeryShop.DataAccess.Entities
         public decimal Total { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
-        public int ShoppingCartId { get; set; }
+        public int CartId { get; set; }
         public int UserId { get; set; }
         public int LocationId { get; set; }
         public decimal GrandTotal { get; set; }

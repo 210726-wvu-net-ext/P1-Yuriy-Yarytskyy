@@ -25,6 +25,7 @@ namespace BakeryShop.DataAccess
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
 
         public virtual DbSet<PaymentDetails> PaymentDetails { get; set; }
 

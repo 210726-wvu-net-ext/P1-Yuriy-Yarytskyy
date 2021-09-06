@@ -4,14 +4,16 @@ using BakeryShop.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BakeryShop.DataAccess.Migrations
 {
     [DbContext(typeof(p0dbContext))]
-    partial class p0dbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906155329_again")]
+    partial class again
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
