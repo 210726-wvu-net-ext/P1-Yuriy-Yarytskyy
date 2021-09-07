@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BakeryShop.Domain.Configuration;
 using BakeryShop.Domain.Implementation;
+using BakeryShop.Domain.Models;
 using BakeryShop.WebApp.Configuration;
 using Microsoft.AspNetCore.Authentication;
 
@@ -40,7 +41,10 @@ namespace BakeryShop.WebApp
             {
                 builder.AddRazorRuntimeCompilation();
             }
+
 #endif
+            services.Configure<RazorPayConfig>(Configuration.GetSection("RazorPayConfig"));
+
         }
 
     

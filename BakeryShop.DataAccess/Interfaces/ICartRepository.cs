@@ -15,6 +15,6 @@ namespace BakeryShop.DataAccess.Interfaces
         int DeleteItem(Guid cartId, int itemId);
         int UpdateQuantity(Guid cartId, int itemId, int Quantity);
         int UpdateCart(Guid cartId, int userId);
-        
+
     }
 }

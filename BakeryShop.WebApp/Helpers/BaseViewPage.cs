@@ -23,8 +23,7 @@ namespace BakeryShop.WebApp.Helpers
                     return _userAccessor.GetUser();
                 else
                     return null;
-
-                }
+            }
         }
     }
 }

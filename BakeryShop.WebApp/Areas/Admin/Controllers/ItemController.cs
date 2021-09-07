@@ -30,7 +30,7 @@ namespace BakeryShop.WebApp.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Categories = _catalogService.GetCategories();
-            ViewBag.ItemTypes = _catalogService.GetInventory();
+            ViewBag.Item = _catalogService.GetInventory();
             return View();
         }
 
@@ -57,14 +57,14 @@ namespace BakeryShop.WebApp.Areas.Admin.Controllers
 
             }
             ViewBag.Categories = _catalogService.GetCategories();
-            ViewBag.ItemTypes = _catalogService.GetInventory();
+            ViewBag.Item = _catalogService.GetInventory();
             return View();
         }
 
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = _catalogService.GetCategories();
-            ViewBag.ItemTypes = _catalogService.GetInventory();
+            ViewBag.Item = _catalogService.GetInventory();
             Item data = _catalogService.GetItem(id);
             ItemModel model = new ItemModel
             {

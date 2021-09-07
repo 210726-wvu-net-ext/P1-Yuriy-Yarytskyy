@@ -28,12 +28,14 @@ namespace BakeryShop.Domain.Configuration
                 AddEntityFrameworkStores<p0dbContext>().AddDefaultTokenProviders();
             services.AddScoped<DbContext, p0dbContext>();
 
-            
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddTransient<IRepository<Item>, Repository<Item>>();
             services.AddTransient<IRepository<ItemCategory>, Repository<ItemCategory>>();
             services.AddTransient<IRepository<Inventory>, Repository<Inventory>>();
             services.AddTransient<IRepository<CartItem>, Repository<CartItem>>();
+            services.AddTransient<IRepository<OrderItem>, Repository<OrderItem>>();
+            services.AddTransient<IRepository<PaymentDetails>, Repository<PaymentDetails>>();
 
         }
     }

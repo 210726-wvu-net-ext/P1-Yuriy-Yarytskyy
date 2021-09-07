@@ -17,7 +17,6 @@ namespace BakeryShop.WebApp.Controllers
     public class CartController : BaseController
     {
         ICartService _cartService;
-
         Guid CartId
         {
             get
@@ -36,8 +35,7 @@ namespace BakeryShop.WebApp.Controllers
                 return Id;
             }
         }
-
-        public CartController(ICartService cartService, UserManager<User> userManager) : base(userManager)
+        public CartController(ICartService cartService, IUserAccessor userAccessor) : base(userAccessor)
         {
             _cartService = cartService;
         }
@@ -46,11 +44,12 @@ namespace BakeryShop.WebApp.Controllers
             CartModel cart = _cartService.GetCartDetails(CartId);
             if (CurrentUser != null && cart != null)
             {
-                //TempData.Set("Cart", cart);
+                TempData.Set("Cart", cart);
                 _cartService.UpdateCart(cart.Id, CurrentUser.Id);
             }
             return View(cart);
         }
+
         [Route("Cart/AddToCart/{ItemId}/{UnitPrice}/{Quantity}")]
         public IActionResult AddToCart(int ItemId, decimal UnitPrice, int Quantity)
         {
@@ -91,6 +90,12 @@ namespace BakeryShop.WebApp.Controllers
         {
             return View();
         }
-        
+        [HttpPost]
+        public IActionResult CheckOut(Address address)
+        {
+            TempData.Set("Address", address);
+            return RedirectToAction("Index", "Payment");
+        }
+
     }
 }

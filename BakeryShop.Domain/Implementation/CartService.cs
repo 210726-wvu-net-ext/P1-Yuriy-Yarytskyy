@@ -89,7 +89,7 @@ namespace BakeryShop.Domain.Implementation
                     subTotal += item.Total;
                 }
                 model.Total = subTotal;
-                //8 tax
+                //8% tax
                 model.Tax = Math.Round((model.Total * 8) / 100, 2);
                 model.GrandTotal = model.Tax + model.Total;
             }

@@ -24,6 +24,7 @@ namespace BakeryShop.DataAccess
         public virtual DbSet<ItemCategory> ItemCategories { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Address> Address { get; set; }
 
@@ -34,7 +35,7 @@ namespace BakeryShop.DataAccess
             //needed for migration
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=tcp:rev-yyarytskyy.database.windows.net,1433;Initial Catalog=p0db;Persist Security Info=False;User ID=petadmin;Password=R@spberryPi4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer(@"Server=tcp:rev-yyarytskyy.database.windows.net,1433;Initial Catalog=p1.1db;Persist Security Info=False;User ID=petadmin;Password=R@spberryPi4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
             base.OnConfiguring(optionsBuilder);
         }
