@@ -8,20 +8,21 @@ trigger:
     include:
     - master
 
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloudBakeryShop'
+        organization: '210726-wvu-net-ext'
+        scannerMode: 'MSBuild'
+        projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+        projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
 pr:
   branches:
     include:
     - master
 
 pool:
-  
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloudBakeryShop'
-    organization: '210726-wvu-net-ext'
-    scannerMode: 'MSBuild'
-    projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
-    projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+  vmImage: ubuntu-latest
+
 
 variables: #Path to folder with .sln
   solution: BakeryShop.WebApp
