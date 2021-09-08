@@ -14,7 +14,7 @@ pr:
     - master
 
 pool:
-  vmImage: ubuntu-latest
+  
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloudBakeryShop'
