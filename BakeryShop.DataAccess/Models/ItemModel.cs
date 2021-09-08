@@ -16,6 +16,5 @@ namespace BakeryShop.DataAccess.Models
         public int Quantity { get; set; }
         public decimal Total { get; set; }
         public string ImageUrl { get; set; }
-        public int CategoryId { get; set; }
     }
 }

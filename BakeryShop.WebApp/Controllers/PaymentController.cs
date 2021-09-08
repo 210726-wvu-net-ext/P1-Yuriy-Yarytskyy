@@ -99,7 +99,7 @@ namespace BakeryShop.WebApp.Controllers
                         }
                         else
                         {
-                            ViewBag.Message = "Although, due to some technical issues it's not get updated in our side. We will contact you soon..";
+                            ViewBag.Message = "Payment didn't go through.";
                         }
                     }
                 }

@@ -12,8 +12,9 @@ namespace BakeryShop.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         ICatalogService _catalogService;
+        private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(ILogger<HomeController> logger, ICatalogService catalogService)
         {
@@ -25,12 +26,6 @@ namespace BakeryShop.WebApp.Controllers
         {
             var items = _catalogService.GetItems();
             return View(items);
-        }
-
-        public IActionResult IndexCategoryResult()
-        {
-            var categories = _catalogService.GetCategories();
-            return View(categories);
         }
 
         public IActionResult Privacy()

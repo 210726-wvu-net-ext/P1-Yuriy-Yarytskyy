@@ -16,7 +16,6 @@ namespace BakeryShop.DataAccess.Entities
         public string PaymentId { get; set; }
         public DateTime CreatedDate { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
-        public int LocationId { get; set; }
-        
+
     }
 }

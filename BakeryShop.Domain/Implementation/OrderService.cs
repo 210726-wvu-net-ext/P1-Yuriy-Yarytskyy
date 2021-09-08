@@ -18,33 +18,23 @@ namespace BakeryShop.Domain.Implementation
             _orderRepo = orderRepo;
         }
 
-        //public OrderModel GetOrderDetails(string OrderId)
-        //{
-        //    var model = _orderRepo.GetOrderDetails(OrderId);
-        //    if (model != null && model.Items.Count > 0)
-        //    {
-        //        decimal subTotal = 0;
-        //        foreach (var item in model.Items)
-        //        {
-        //            item.Total = item.UnitPrice * item.Quantity;
-        //            subTotal += item.Total;
-        //        }
-        //        model.Total = subTotal;
-        //        //8% tax
-        //        model.Tax = Math.Round((model.Total * 8) / 100, 2);
-        //        model.GrandTotal = model.Tax + model.Total;
-        //    }
-        //    return model;
-        //}
-
-        //public PagingListModel<OrderModel> GetOrderList(int page = 1, int pageSize = 10)
-        //{
-        //    return _orderRepo.GetOrderList(page, pageSize);
-        //}
-
         public OrderModel GetOrderDetails(string OrderId)
         {
-            throw new NotImplementedException();
+            var model = _orderRepo.GetOrderDetails(OrderId);
+            if (model != null && model.Items.Count > 0)
+            {
+                decimal subTotal = 0;
+                foreach (var item in model.Items)
+                {
+                    item.Total = item.UnitPrice * item.Quantity;
+                    subTotal += item.Total;
+                }
+                model.Total = subTotal;
+                //8% tax
+                model.Tax = Math.Round((model.Total * 8) / 100, 2);
+                model.GrandTotal = model.Tax + model.Total;
+            }
+            return model;
         }
 
         public IEnumerable<Order> GetUserOrders(int UserId)
