@@ -12,45 +12,45 @@ trigger:
     - master
 
     - task: SonarCloudPrepare@1
-      inputs:
-            SonarCloud: 'SonarCloudBakeryShop'
-            organization: '210726-wvu-net-ext'
-            scannerMode: 'MSBuild'
-            projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
-            projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+  inputs:
+    SonarCloud: 'SonarCloudBakeryShop'
+    organization: '210726-wvu-net-ext'
+    scannerMode: 'MSBuild'
+    projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+    projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
     
-            pr:
-              branches:
-                include:
-                - master
+    pr:
+    branches:
+    include:
+    - master
 
-            pool:
-              vmImage: ubuntu-latest
+    pool:
+      vmImage: ubuntu-latest
 
 
-            variables: #Path to folder with .sln
-              solution: BakeryShop.WebApp
+      variables: #Path to folder with .sln
+      solution: BakeryShop.WebApp
 
-            stages: 
-            - stage: build
+      stages: 
+      - stage: build
 
-              jobs:
-              - job: build
+        obs:
+      - job: build
                 
-                steps:
+        steps:
 
-                - script: dotnet build --configuration Release
-                  displayName: dotnet build
-                  workingDirectory: $(solution)
+      - script: dotnet build --configuration Release
+        displayName: dotnet build
+        workingDirectory: $(solution)
 
-                - script: dotnet test --configuration Release
-                  displayName: dotnet test
-                  workingDirectory: $(solution)
+      - script: dotnet test --configuration Release
+        isplayName: dotnet test
+        workingDirectory: $(solution)
                   
-                - task: SonarCloudAnalyze@1
+      - task: SonarCloudAnalyze@1
 
-                - task: SonarQubePublish@4
-              inputs:
-                pollingTimeoutSec: '300'
+      - task: SonarQubePublish@4
+      inputs:
+        pollingTimeoutSec: '300'
     
 
