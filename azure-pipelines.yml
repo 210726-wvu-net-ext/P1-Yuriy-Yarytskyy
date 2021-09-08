@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+
+
+
 trigger:
   branches:
     include:
@@ -10,36 +13,44 @@ trigger:
 
     - task: SonarCloudPrepare@1
       inputs:
-        SonarCloud: 'SonarCloudBakeryShop'
-        organization: '210726-wvu-net-ext'
-        scannerMode: 'MSBuild'
-        projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
-        projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
-pr:
-  branches:
-    include:
-    - master
-
-pool:
-  vmImage: ubuntu-latest
-
-
-variables: #Path to folder with .sln
-  solution: BakeryShop.WebApp
-
-stages: 
-- stage: build
-  jobs:
-  - job: build
+            SonarCloud: 'SonarCloudBakeryShop'
+            organization: '210726-wvu-net-ext'
+            scannerMode: 'MSBuild'
+            projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+            projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
     
-    steps:
+            pr:
+              branches:
+                include:
+                - master
 
-    - script: dotnet build --configuration Release
-      displayName: dotnet build
-      workingDirectory: $(solution)
+            pool:
+              vmImage: ubuntu-latest
 
-    - script: dotnet test --configuration Release
-      displayName: dotnet test
-      workingDirectory: $(solution)
+
+            variables: #Path to folder with .sln
+              solution: BakeryShop.WebApp
+
+            stages: 
+            - stage: build
+
+              jobs:
+              - job: build
+                
+                steps:
+
+                - script: dotnet build --configuration Release
+                  displayName: dotnet build
+                  workingDirectory: $(solution)
+
+                - script: dotnet test --configuration Release
+                  displayName: dotnet test
+                  workingDirectory: $(solution)
+                  
+                - task: SonarCloudAnalyze@1
+
+                - task: SonarQubePublish@4
+              inputs:
+                pollingTimeoutSec: '300'
     
 
