@@ -20,9 +20,9 @@ trigger:
     projectName: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
     
     pr:
-    branches:
-    include:
-    - master
+      branches:
+        include:
+        - master
 
     pool:
       vmImage: ubuntu-latest
