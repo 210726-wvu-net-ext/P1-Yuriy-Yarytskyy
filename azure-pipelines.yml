@@ -33,4 +33,7 @@ stages:
     - script: dotnet test --configuration Release
       displayName: dotnet test
       workingDirectory: $(solution)
+    
+    - script: ls
+      displayName: ls
 
