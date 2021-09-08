@@ -12,7 +12,7 @@ trigger:
     - master
 
     - task: SonarCloudPrepare@1
-  inputs:
+    inputs:
     SonarCloud: 'SonarCloudBakeryShop'
     organization: '210726-wvu-net-ext'
     scannerMode: 'MSBuild'
