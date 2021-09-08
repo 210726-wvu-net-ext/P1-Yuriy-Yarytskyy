@@ -15,6 +15,14 @@ pr:
   branches:
     include:
     - main
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloudBakeryShop'
+        organization: '210726-wvu-net-ext'
+        scannerMode: 'MSBuild'
+        projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+        projectName: 'P1-Yuriy-Yarytskyy_1'
+
 
 pool:
   vmImage: ubuntu-latest
@@ -38,10 +46,4 @@ stages:
       displayName: dotnet test
       workingDirectory: $(solution)
       
-    - task: SonarCloudPrepare@1
-      inputs:
-        SonarCloud: 'SonarCloudBakeryShop'
-        organization: '210726-wvu-net-ext'
-        scannerMode: 'MSBuild'
-        projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
-        projectName: 'P1-Yuriy-Yarytskyy_1'
+    
