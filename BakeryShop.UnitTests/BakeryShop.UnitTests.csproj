@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BakeryShop.DataAccess\BakeryShop.DataAccess.csproj" />
+    <ProjectReference Include="..\BakeryShop.WebApp\BakeryShop.WebApp.csproj" />
   </ItemGroup>
 
 </Project>

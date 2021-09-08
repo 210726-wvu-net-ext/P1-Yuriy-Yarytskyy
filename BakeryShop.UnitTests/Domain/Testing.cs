@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BakeryShop.WebApp.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
 namespace BakeryShop.UnitTests.Domain
 {
     public class Testing
     {
+
         public class CheckAdmin
         {
             [Fact]
