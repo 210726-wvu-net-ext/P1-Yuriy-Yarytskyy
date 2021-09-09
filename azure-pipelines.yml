@@ -20,7 +20,7 @@ pr:
     - P1-Yuriy-Yarytskyy
 
 variables:
-  slnPath: P1-Yuriy-Yarytskyy
+  slnPath: P1-Yuriy-Yarytskyy/BakeryShop.WebApp
 
 stages:
 - stage: build
