@@ -13,6 +13,5 @@ namespace BakeryShop.DataAccess.Interfaces
     {
         IEnumerable<Order> GetUserOrders(int UserId);
         OrderModel GetOrderDetails(string id);
-        //PagingListModel<OrderModel> GetOrderList(int page, int pageSize);
     }
 }
