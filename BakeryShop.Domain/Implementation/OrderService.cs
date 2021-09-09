@@ -37,6 +37,12 @@ namespace BakeryShop.Domain.Implementation
             return model;
         }
 
+        //public PagingListModel<OrderModel> GetOrderList(int page = 1, int pageSize = 10)
+        //{
+        //    return _orderRepo.GetOrderList(page, pageSize);
+        //}
+
+
         public IEnumerable<Order> GetUserOrders(int UserId)
         {
             return _orderRepo.GetUserOrders(UserId);

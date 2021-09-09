@@ -1,20 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BakeryShop.DataAccess.Models;
 using BakeryShop.Domain.Interfaces;
 using BakeryShop.WebApp.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BakeryShop.WebApp.Areas.User.Controllers
 {
     public class OrderController : BaseController
     {
-        private IOrderService _orderService;
-
+        IOrderService _orderService;
         public OrderController(IOrderService orderService, IUserAccessor userAccessor) : base(userAccessor)
-
         {
             _orderService = orderService;
         }
