@@ -9,7 +9,7 @@ trigger:
     - main
   paths:
     include:
-    - P1-Yuriy-Yarytskyy/BakeryShop.WebApp
+    - BakeryShop.WebApp
 
 pr:
   branches:
@@ -17,10 +17,10 @@ pr:
     - main
   paths:
     include:
-    - P1-Yuriy-Yarytskyy/BakeryShop.WebApp
+    - BakeryShop.WebApp
 
 variables:
-  slnPath: P1-Yuriy-Yarytskyy/BakeryShop.WebApp
+  slnPath: BakeryShop.WebApp
 
 stages:
 - stage: build
