@@ -9,7 +9,7 @@ trigger:
     - main
   paths:
     include:
-    - P1-Yuriy-Yarytskyy/BakeryShop.WebApp/azure-pipelines.yml
+    - P1-Yuriy-Yarytskyy
 
 pr:
   branches:
@@ -17,10 +17,10 @@ pr:
     - main
   paths:
     include:
-    - P1-Yuriy-Yarytskyy/BakeryShop.WebApp/azure-pipelines.yml
+    - P1-Yuriy-Yarytskyy
 
 variables:
-  slnPath: P1-Yuriy-Yarytskyy/BakeryShop.WebApp
+  slnPath: P1-Yuriy-Yarytskyy
 
 stages:
 - stage: build
