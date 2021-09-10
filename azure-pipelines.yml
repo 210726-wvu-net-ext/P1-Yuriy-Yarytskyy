@@ -82,9 +82,6 @@ stages:
       displayName: dotnet publish
       workingDirectory: $(slnPath)
 
-    - publish: $(Build.StagingDirectory)
-      displayName: publish app artifact
-      artifact: app
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
