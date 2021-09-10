@@ -78,7 +78,7 @@ stages:
 
     - script: dotnet publish
         --configuration Release
-        --output $(Build.StagingDirectory)
+        --output $(Build.ArtifactStagingDirectory)
       displayName: dotnet publish
       workingDirectory: $(slnPath)
 
