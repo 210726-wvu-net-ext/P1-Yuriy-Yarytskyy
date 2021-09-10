@@ -92,7 +92,7 @@ stages:
         azureSubscription: 'Azure subscription 1(f4f1f338-ba77-40d7-ba73-c9b0cfd7caad)'
         appType: 'webApp'
         WebAppName: 'revature-yarytskyy'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        
       # next steps...
       # deploying to azure app service
       # better integration/reporting with azure pipelines?
