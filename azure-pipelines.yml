@@ -93,6 +93,8 @@ stages:
         azureSubscription: 'Azure subscription 1(f4f1f338-ba77-40d7-ba73-c9b0cfd7caad)'
         appType: 'webApp'
         WebAppName: 'revature-yarytskyy'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)'
+  
         
       # next steps...
       # deploying to azure app service
