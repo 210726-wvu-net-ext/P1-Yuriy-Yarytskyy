@@ -88,9 +88,10 @@ stages:
 
     - task: AzureRmWebAppDeployment@4
       inputs:
-        ConnectionType: 'PublishProfile'
-        PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
-        PublishProfilePassword: 'R@spberryPi4'
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Azure subscription 1(f4f1f338-ba77-40d7-ba73-c9b0cfd7caad)'
+        appType: 'webApp'
+        WebAppName: 'revature-yarytskyy'
         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
       # next steps...
       # deploying to azure app service
