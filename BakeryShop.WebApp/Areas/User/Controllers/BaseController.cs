@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BakeryShop.WebApp.Interfaces;
 
+
 namespace BakeryShop.WebApp.Areas.User.Controllers
 {
     [CustomAuthorize(Roles = "User")]
@@ -24,11 +25,9 @@ namespace BakeryShop.WebApp.Areas.User.Controllers
         }
 
         IUserAccessor _userAccessor;
-
         public BaseController(IUserAccessor userAccessor)
         {
             _userAccessor = userAccessor;
         }
     }
-    
 }

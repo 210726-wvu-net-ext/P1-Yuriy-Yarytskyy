@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  bakeryshop.webapp:
+    image: ${DOCKER_REGISTRY-}bakeryshopwebapp
+    build:
+      context: .
+      dockerfile: BakeryShop.WebApp/Dockerfile

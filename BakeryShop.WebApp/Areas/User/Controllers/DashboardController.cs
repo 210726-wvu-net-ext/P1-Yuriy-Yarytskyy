@@ -11,7 +11,7 @@ namespace BakeryShop.WebApp.Areas.User.Controllers
     {
         public DashboardController(IUserAccessor userAccessor) : base(userAccessor)
         {
-            
+
         }
         public IActionResult Index()
         {

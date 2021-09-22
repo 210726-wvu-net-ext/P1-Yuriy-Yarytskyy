@@ -14,9 +14,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserId)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.PaymentId)
                 </th>
@@ -34,16 +32,15 @@
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.PaymentId)
                     </td>
+                    
                     <td>
                         @Html.DisplayFor(modelItem => item.CreatedDate)
                     </td>
+                    
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id=item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
                     </td>
                 </tr>
             }
@@ -55,7 +52,7 @@ else
     <div class="row">
         <div class="col-sm-12 mt-4">
             <p style="min-height:300px">
-                No orders for your account have been found. Please make a purchase first. <br><br>
+                You haven't placed any order yet. Please search your pizza from the menu! <br><br>
                 <a href="/" class="btn btn-primary">Browse Menu</a>
             </p>
         </div>

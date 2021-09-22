@@ -46,7 +46,7 @@ namespace BakeryShop.Domain.Implementation
         
         public IEnumerable<Item> GetItems()
         {
-             return _itemRepository.GetAll().OrderBy(item => item.ItemCategory);
+            return _itemRepository.GetAll().OrderBy(item => item.ItemCategoryId);
         }
 
         public IEnumerable<Inventory> GetInventory()

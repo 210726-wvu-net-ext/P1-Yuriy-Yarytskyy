@@ -7,30 +7,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BakeryShop.Domain.Interfaces;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace BakeryShop.WebApp.Controllers
 {
-    
     public class HomeController : Controller
     {
-        public ICatalogService _catalogService;
         private readonly ILogger<HomeController> _logger;
-        
+        ICatalogService _catalogService;
 
         public HomeController(ILogger<HomeController> logger, ICatalogService catalogService)
         {
             _logger = logger;
             _catalogService = catalogService;
-        }
-
-        public object WithAnonymousIdentity()
-        {
-            throw new NotImplementedException();
-        }
-
-        public HomeController(NullLogger<HomeController> logger)
-        {
         }
 
         public IActionResult Index()
@@ -39,9 +27,10 @@ namespace BakeryShop.WebApp.Controllers
             return View(items);
         }
 
-        public object WithIdentity(string v1, string v2)
+        public IActionResult IndexCategoryResult()
         {
-            throw new NotImplementedException();
+            var categories = _catalogService.GetCategories();
+            return View(categories);
         }
 
         public IActionResult Privacy()
@@ -54,7 +43,5 @@ namespace BakeryShop.WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-       
     }
 }
