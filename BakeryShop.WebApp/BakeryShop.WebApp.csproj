@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+<<<<<<< HEAD
     <UserSecretsId>17ffc376-86b6-4522-92d5-fc0ba02e8f95</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+=======
+    <UserSecretsId>e55aa111-5a52-40f8-805c-ffffcd2b013a</UserSecretsId>
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7
   </PropertyGroup>
 
   <ItemGroup>

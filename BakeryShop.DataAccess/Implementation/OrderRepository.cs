@@ -58,6 +58,7 @@ namespace BakeryShop.DataAccess.Implementation
             return model;
         }
 
+<<<<<<< HEAD
         //public PagingListModel<OrderModel> GetOrderList(int page, int pageSize)
         //{
         //    var pagingModel = new PagingListModel<OrderModel>();
@@ -84,5 +85,7 @@ namespace BakeryShop.DataAccess.Implementation
         //    pagingModel.TotalRows = itemCounts;
         //    return pagingModel;
         //}
+=======
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7
     }
 }

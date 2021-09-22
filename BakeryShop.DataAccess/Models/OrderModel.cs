@@ -21,6 +21,10 @@ namespace BakeryShop.DataAccess.Models
         public decimal GrandTotal { get; set; }
         public DateTime CreatedDate { get; set; }
         public ICollection<ItemModel> Items { get; set; }
+<<<<<<< HEAD
         public string Locality { get; internal set; }
+=======
+     
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7
     }
 }

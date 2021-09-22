@@ -1,5 +1,11 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "secrets1": {
+      "type": "secrets"
+    },
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7
     "mssql1": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:DbConnection"

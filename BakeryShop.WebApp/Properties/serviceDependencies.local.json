@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/rev-yyarytskyy/databases/p1.1db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DbConnection",
+      "secretStore": "LocalSecretsFile"
+    }
+  }
+}

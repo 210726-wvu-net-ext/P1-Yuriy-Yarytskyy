@@ -1,0 +1,93 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - BakeryShop.WebApp
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - BakeryShop.WebApp
+
+variables:
+  slnPath: BakeryShop.WebApp
+
+stages:
+- stage: build
+  jobs:
+  - job: build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    # not always a good idea to take for granted
+    # the version of build dependencies installed on
+    # microsoft's build agents
+    - task: UseDotNet@2
+      displayName: dotnet sdk 5
+      inputs:
+        packageType: 'sdk'
+        version: '5.x'
+
+    - task: UseDotNet@2
+      displayName: dotnet runtime 3.1
+      inputs:
+        packageType: 'runtime'
+        version: '3.1.x'
+
+    - task: SonarCloudPrepare@1
+      displayName: sonar prepare
+      inputs:
+        SonarCloud: 'SonarCloudBakeryShop'
+        organization: '210726-wvu-net-ext'
+        scannerMode: 'MSBuild'
+        projectKey: '210726-wvu-net-ext_P1-Yuriy-Yarytskyy_1'
+        extraProperties: |
+          sonar.exclusions=**/lib/**/*
+          sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml
+          
+    - script: dotnet build --configuration Release
+      displayName: dotnet build
+      workingDirectory: $(slnPath)
+
+    - script: dotnet test
+        --configuration Release
+        --collect:"XPlat Code Coverage"
+        --results-directory $(Agent.TempDirectory)
+        --
+        DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+      displayName: dotnet test
+      workingDirectory: $(slnPath)
+
+    - task: SonarCloudAnalyze@1
+      displayName: sonar analyze
+
+    - task: SonarCloudPublish@1
+      displayName: sonar publish gate
+      inputs:
+        pollingTimeoutSec: '300'
+
+    - script: dotnet publish
+        --configuration Release
+        --output $(Build.StagingDirectory)
+      displayName: dotnet publish
+      workingDirectory: $(slnPath)
+
+    - publish: $(Build.StagingDirectory)
+      displayName: publish app artifact
+      artifact: app
+
+      # next steps...
+      # deploying to azure app service
+      # better integration/reporting with azure pipelines?
+        # you can report test results to azure pipelines
+        # so it can show them in its GUI

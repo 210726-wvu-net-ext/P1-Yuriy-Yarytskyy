@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakeryShop.Domain", "Bakery
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakeryShop.WebApp", "BakeryShop.WebApp\BakeryShop.WebApp.csproj", "{B8CFAF67-E196-4419-9679-76054D6EFC6A}"
 EndProject
+<<<<<<< HEAD:BakeryShop.WebApp.sln
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D72E31A3-1C44-4258-B894-84DF006C261C}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryShop.UnitTest", "..\BakeryShop.UnitTest\BakeryShop.UnitTest.csproj", "{D89B67D5-9083-42FE-A97D-0A2EDAE8E677}"
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7:BakeryShop.WebApp/BakeryShop.WebApp.sln
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +33,17 @@ Global
 		{B8CFAF67-E196-4419-9679-76054D6EFC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8CFAF67-E196-4419-9679-76054D6EFC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8CFAF67-E196-4419-9679-76054D6EFC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD:BakeryShop.WebApp.sln
 		{D72E31A3-1C44-4258-B894-84DF006C261C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D72E31A3-1C44-4258-B894-84DF006C261C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D72E31A3-1C44-4258-B894-84DF006C261C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D72E31A3-1C44-4258-B894-84DF006C261C}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{D89B67D5-9083-42FE-A97D-0A2EDAE8E677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89B67D5-9083-42FE-A97D-0A2EDAE8E677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89B67D5-9083-42FE-A97D-0A2EDAE8E677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89B67D5-9083-42FE-A97D-0A2EDAE8E677}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7:BakeryShop.WebApp/BakeryShop.WebApp.sln
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
