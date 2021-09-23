@@ -1,5 +1,3 @@
-# P1-Yuriy-Yarytskyy
-Yuriy's project 1 repo
 # Bakery Shop Ordering
 
 ## Project Description
@@ -37,5 +35,14 @@ User
 Admin
 * Login
 * Logout
-* Create new item to be sold
+* Create new item to be displayed for sale
 * Delete/Edit item
+
+To-do list:
+* Expend Admin functionality
+* Edit Styling
+
+##Sample: 
+https://revature-yarytskyy.azurewebsites.net
+## Contributors
+* Yuriy Yarytskyy
