@@ -42,7 +42,7 @@ To-do list:
 * Expend Admin functionality
 * Edit Styling
 
-##Sample: 
+## Sample: 
 * https://revature-yarytskyy.azurewebsites.net
 ## Contributors
 * Yuriy Yarytskyy
