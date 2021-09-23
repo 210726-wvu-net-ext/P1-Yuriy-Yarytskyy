@@ -58,34 +58,5 @@ namespace BakeryShop.DataAccess.Implementation
             return model;
         }
 
-<<<<<<< HEAD
-        //public PagingListModel<OrderModel> GetOrderList(int page, int pageSize)
-        //{
-        //    var pagingModel = new PagingListModel<OrderModel>();
-        //    var data = (from order in appContext.Orders
-        //                join payment in appContext.PaymentDetails
-        //                on order.PaymentId equals payment.Id
-        //                select new OrderModel
-        //                {
-        //                    Id = order.Id,
-        //                    UserId = order.UserId,
-        //                    PaymentId = payment.Id,
-        //                    CreatedDate = order.CreatedDate,
-        //                    GrandTotal = payment.GrandTotal
-        //                });
-
-        //    int itemCounts = data.Count();
-        //    var orders = data.Skip((page - 1) * pageSize).Take(pageSize);
-
-        //    var pagedListData = new StaticPagedList<OrderModel>(orders, page, pageSize, itemCounts);
-
-        //    pagingModel.Data = pagedListData;
-        //    pagingModel.Page = page;
-        //    pagingModel.PageSize = pageSize;
-        //    pagingModel.TotalRows = itemCounts;
-        //    return pagingModel;
-        //}
-=======
->>>>>>> 54966e0325f6b567a459831c54ee7e468a3fada7
     }
 }
