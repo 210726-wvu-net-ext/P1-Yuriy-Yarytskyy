@@ -43,6 +43,6 @@ To-do list:
 * Edit Styling
 
 ##Sample: 
-https://revature-yarytskyy.azurewebsites.net
+* https://revature-yarytskyy.azurewebsites.net
 ## Contributors
 * Yuriy Yarytskyy
